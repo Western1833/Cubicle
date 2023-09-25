@@ -26,8 +26,22 @@ exports.createCube = (cubeData) => {
     return newCube;
 }
 
-exports.getAllCubes = () => {
-    return [...cubes];
+exports.getAllCubes = (search, from ,to) => {
+    let  filterCubes = [...cubes];
+
+    if(search){
+        filterCubes = filterCubes.filter(cube => cube.name.toLowerCase().includes(search));
+    }
+
+    if(from){
+        filterCubes = filterCubes.filter(cube => cube.difficultyLevel >= Number(from));
+    }
+
+    if(to){
+        filterCubes = filterCubes.filter(cube => cube.difficultyLevel <= Number(to));
+    }
+
+    return filterCubes;
 }
 
 exports.getSingleCube = (id) => {
